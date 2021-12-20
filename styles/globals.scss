@@ -32,3 +32,24 @@ a {
 * {
   box-sizing: border-box;
 }
+
+// SCROLL BAR
+
+html::-webkit-scrollbar {
+  width: 10px;
+}
+html::-webkit-scrollbar-track {
+  background: rgb(207, 207, 207);
+}
+html::-webkit-scrollbar-thumb {
+  background: rgb(136, 136, 136);
+  border-radius: 10px;
+}
+html::-webkit-scrollbar-thumb:hover {
+  background: $primary;
+  border-radius: 10px;
+}
+html::-webkit-scrollbar-thumb:active {
+  background: $primary;
+  border-radius: 10px;
+}
