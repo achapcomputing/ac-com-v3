@@ -6,6 +6,8 @@ function CodingItem({ project }) {
     <div className={codingStyles.item}>
       <h3>{project.title}</h3>
       <p>{project.custom_excerpt}</p>
+      {/* <p>{project.html}</p> */}
+      <div dangerouslySetInnerHTML={{ __html: project.html }}></div>
       {/* <img className={portfolioStyles.logo} src={project.feature_image} /> */}
     </div>
     // <>

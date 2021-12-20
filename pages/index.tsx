@@ -8,7 +8,7 @@ type CodingProject = {
   title: string;
   slug: string;
   custom_excerpt: string;
-  feature_image: string;
+  html: string;
 };
 
 export default function Home({ projects }: { projects: CodingProject[] }) {
@@ -44,7 +44,7 @@ export default function Home({ projects }: { projects: CodingProject[] }) {
 async function getPortfolio() {
   const { BLOG_URL, CONTENT_API_KEY } = process.env;
   const res = await fetch(
-    `${BLOG_URL}/ghost/api/v3/content/pages?key=${CONTENT_API_KEY}&filter=tags:portfolio&fields=title,slug,custom_excerpt,feature_image`
+    `${BLOG_URL}/ghost/api/v3/content/pages?key=${CONTENT_API_KEY}&filter=tags:coding-portfolio&fields=title,slug,custom_excerpt,html`
   ).then((res) => res.json());
   const pages = res.pages;
   return pages;
