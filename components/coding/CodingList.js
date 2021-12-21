@@ -45,7 +45,7 @@ const CodingList = ({ projects }) => {
 
     <div className={codingStyles.container}>
       {projects.map((project) => (
-        <CodingItem project={project} />
+        <CodingItem key={project.slug} project={project} />
       ))}
     </div>
   );

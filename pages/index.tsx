@@ -1,8 +1,14 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.scss';
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
 import Header from '../components/Header';
+import Project from '../components/Project';
 import Coding from '../components/coding/CodingList';
+
+import codingStyles from '../styles/Coding.module.scss';
 
 type CodingProject = {
   title: string;
@@ -26,7 +32,15 @@ export default function Home({ projects }: { projects: CodingProject[] }) {
       <main className={styles.main}>
         <Header />
 
-        <Coding projects={projects} />
+        {/* <Coding projects={projects} /> */}
+
+        <div className={codingStyles.container}>
+          {projects.map((project, index) => (
+            <div className={codingStyles.item}>
+              <Project project={project} />
+            </div>
+          ))}
+        </div>
       </main>
 
       <footer className={styles.footer}>
@@ -50,9 +64,35 @@ async function getPortfolio() {
   return pages;
 }
 
-Home.getInitialProps = async function () {
-  const projects: CodingProject[] = await getPortfolio();
+// Home.getInitialProps = async function () {
+//   const projects: CodingProject[] = await getPortfolio();
+//   return {
+//     projects: projects,
+//   };
+// };
+
+export async function getStaticProps() {
+  const files = fs.readdirSync(path.join('projects')); // get files from projects folder
+
+  const projects = files.map((filename) => {
+    // create slug from filename
+    const slug = filename.replace('.md', '');
+    // get frontmatter
+    const meta = fs.readFileSync(path.join('projects', filename), 'utf-8');
+    const { data: frontmatter, content } = matter(meta);
+
+    return {
+      slug,
+      frontmatter,
+      content,
+    };
+  });
+
   return {
-    projects: projects,
+    props: {
+      projects: projects.sort((a, b) => {
+        return a.frontmatter.order - b.frontmatter.order; // sort by lowest rank shows up first
+      }),
+    },
   };
-};
+}
