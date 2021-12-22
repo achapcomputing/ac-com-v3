@@ -1,10 +1,10 @@
 import { marked } from 'marked';
 import Link from 'next/link';
+import codingStyles from '../styles/Coding.module.scss';
 
 const Project = ({ project }) => {
-  console.log(project.frontmatter.order);
   return (
-    <div class='card'>
+    <div className={codingStyles.item}>
       <h3>{project.frontmatter.title}</h3>
       <p>{project.frontmatter.period}</p>
       <div className='post-body'>

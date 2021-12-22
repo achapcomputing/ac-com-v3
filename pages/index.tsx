@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import fs from 'fs';
@@ -5,17 +6,45 @@ import path from 'path';
 import matter from 'gray-matter';
 import styles from '../styles/Home.module.scss';
 import codingStyles from '../styles/Coding.module.scss';
+import Filters from '../components/Filters';
 import Header from '../components/Header';
 import Project from '../components/Project';
 
-type CodingProject = {
-  title: string;
-  slug: string;
-  custom_excerpt: string;
-  html: string;
-};
+const allFilters = ['frontend', 'backend', 'devops', 'databases'];
 
-export default function Home({ projects }: { projects: CodingProject[] }) {
+export default function Home({ projects }) {
+  const [selectedFilters, setSelectedFilters] = useState(allFilters);
+  const [selectedProjects, setSelectedProjects] = useState(projects);
+
+  const filterProjects = async (button) => {
+    console.log(button);
+    // setSelectedFilters([button.value]);
+    console.log(selectedFilters);
+    console.log(selectedProjects);
+    // if (button.value === 'all') {
+    //   setFilteredProjects(projects);
+    //   return;
+    // }
+    const filt = allFilters.filter((f) => f !== button.value);
+    setSelectedFilters(filt);
+    const filteredData = projects.filter((p) => {
+      // console.log(p.frontmatter.experience_skills);
+      selectedFilters.includes(p.frontmatter.experience_skills);
+      // p.frontmatter.experience_skills === button.value;
+    });
+    setSelectedProjects(filteredData);
+  };
+
+  useEffect(() => {
+    console.log('use effect');
+    const filteredData = projects.filter((p) => {
+      // console.log(p.frontmatter.experience_skills);
+      selectedFilters.includes(p.frontmatter.experience_skills);
+      // p.frontmatter.experience_skills === button.value;
+    });
+    setSelectedProjects(filteredData);
+  }, [selectedFilters]);
+
   return (
     <div>
       <Head>
@@ -30,12 +59,23 @@ export default function Home({ projects }: { projects: CodingProject[] }) {
       <main className={styles.main}>
         <Header />
 
+        <Filters filters={selectedFilters} filterProjects={filterProjects} />
+
         <div className={codingStyles.container}>
-          {projects.map((project) => (
-            <div className={codingStyles.item}>
-              <Project key={project.slug} project={project} />
-            </div>
+          {selectedProjects.map((project) => (
+            <Project key={project.slug} project={project} />
           ))}
+          {/* {selectedFilters.length == 0
+            ? projects.map((project) => (
+                <Project key={project.slug} project={project} />
+              ))
+            : projects
+                .filter((p) =>
+                  selectedFilters.includes(p.frontmatter.experience_skills)
+                )
+                .map((project) => (
+                  <Project key={project.slug} project={project} />
+                ))} */}
         </div>
       </main>
 
@@ -50,22 +90,6 @@ export default function Home({ projects }: { projects: CodingProject[] }) {
     </div>
   );
 }
-
-async function getPortfolio() {
-  const { BLOG_URL, CONTENT_API_KEY } = process.env;
-  const res = await fetch(
-    `${BLOG_URL}/ghost/api/v3/content/pages?key=${CONTENT_API_KEY}&filter=tags:coding-portfolio&fields=title,slug,custom_excerpt,html`
-  ).then((res) => res.json());
-  const pages = res.pages;
-  return pages;
-}
-
-// Home.getInitialProps = async function () {
-//   const projects: CodingProject[] = await getPortfolio();
-//   return {
-//     projects: projects,
-//   };
-// };
 
 export async function getStaticProps() {
   const files = fs.readdirSync(path.join('projects')); // get files from projects folder
