@@ -2,9 +2,8 @@ import { marked } from 'marked';
 import Link from 'next/link';
 
 const Project = ({ project }) => {
-  console.log(project.frontmatter.order);
   return (
-    <div class='card'>
+    <div>
       <h3>{project.frontmatter.title}</h3>
       <p>{project.frontmatter.period}</p>
       <div className='post-body'>
@@ -16,6 +15,7 @@ const Project = ({ project }) => {
         <a className='btn'>See More</a>
       </Link> */}
     </div>
+
     // Make entire card a link
     // <>
     //   <Link href={`/coding/${project.slug}`}>

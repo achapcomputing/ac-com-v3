@@ -32,8 +32,8 @@ export default function Home({ projects }: { projects: CodingProject[] }) {
 
         <div className={codingStyles.container}>
           {projects.map((project) => (
-            <div className={codingStyles.item}>
-              <Project key={project.slug} project={project} />
+            <div key={project.slug} className={codingStyles.item}>
+              <Project project={project} />
             </div>
           ))}
         </div>
@@ -50,22 +50,6 @@ export default function Home({ projects }: { projects: CodingProject[] }) {
     </div>
   );
 }
-
-async function getPortfolio() {
-  const { BLOG_URL, CONTENT_API_KEY } = process.env;
-  const res = await fetch(
-    `${BLOG_URL}/ghost/api/v3/content/pages?key=${CONTENT_API_KEY}&filter=tags:coding-portfolio&fields=title,slug,custom_excerpt,html`
-  ).then((res) => res.json());
-  const pages = res.pages;
-  return pages;
-}
-
-// Home.getInitialProps = async function () {
-//   const projects: CodingProject[] = await getPortfolio();
-//   return {
-//     projects: projects,
-//   };
-// };
 
 export async function getStaticProps() {
   const files = fs.readdirSync(path.join('projects')); // get files from projects folder
