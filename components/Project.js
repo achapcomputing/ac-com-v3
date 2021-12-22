@@ -16,6 +16,15 @@ const Project = ({ project }) => {
         <a className='btn'>See More</a>
       </Link> */}
     </div>
+    // Make entire card a link
+    // <>
+    //   <Link href={`/coding/${project.slug}`}>
+    //     <a className={codingStyles.item}>
+    //       <h3>{project.title}</h3>
+    //       <p>{project.period}</p>
+    //     </a>
+    //   </Link>
+    // </>
   );
 };
 

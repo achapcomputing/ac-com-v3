@@ -1,6 +1,6 @@
 ---
 title: DevOps Co-op at LexisNexis
-period: January - May 2021 (Rotation 3), January - August 2020 (Rotations 1 & 2)
+period: 'January - May 2021 (Rotation 3), January - August 2020 (Rotations 1 & 2)'
 experience_type: professional
 experience_skills: devops
 order: 2

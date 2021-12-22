@@ -1,14 +1,12 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import styles from '../styles/Home.module.scss';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import styles from '../styles/Home.module.scss';
+import codingStyles from '../styles/Coding.module.scss';
 import Header from '../components/Header';
 import Project from '../components/Project';
-import Coding from '../components/coding/CodingList';
-
-import codingStyles from '../styles/Coding.module.scss';
 
 type CodingProject = {
   title: string;
@@ -32,12 +30,10 @@ export default function Home({ projects }: { projects: CodingProject[] }) {
       <main className={styles.main}>
         <Header />
 
-        {/* <Coding projects={projects} /> */}
-
         <div className={codingStyles.container}>
-          {projects.map((project, index) => (
+          {projects.map((project) => (
             <div className={codingStyles.item}>
-              <Project project={project} />
+              <Project key={project.slug} project={project} />
             </div>
           ))}
         </div>
