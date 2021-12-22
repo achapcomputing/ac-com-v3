@@ -38,3 +38,10 @@
   align-items: center;
   gap: 30px;
 }
+
+@media (max-width: 500px) {
+  .code {
+    width: 250px;
+    height: 4.5rem;
+  }
+}
