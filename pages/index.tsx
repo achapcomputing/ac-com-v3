@@ -24,7 +24,7 @@ export default function Home({ projects }: { projects: CodingProject[] }) {
           name='description'
           content="Ashlyn Chapman's Technical Portfolio"
         />
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/favicon/favicon.ico' />
       </Head>
 
       <main className={styles.main}>
