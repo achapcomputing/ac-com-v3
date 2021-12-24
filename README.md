@@ -1,3 +1,12 @@
+
+## Personal Technical Portfolio Website
+
+[Website Link](ashlynchapman.com)
+
+[Figma UI Layout](https://www.figma.com/file/ks8e6GJ7NET2rwwMOfUngH/AC.com?node-id=0%3A1)
+
+Project is built with Next.js (React), hosted on Vercel, and populated by local markdown text files.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
