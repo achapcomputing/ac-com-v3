@@ -12,4 +12,4 @@ order: 101
 
 [linkedin]: https://linkedin.com/in/apchapman
 [email]: mailto:%20apchapma@ncsu.edu
-[github]: https://github.com/achapcomputing/ac-com-v3
+[github]: https://github.com/apchapcomputing/ac-com-v3
