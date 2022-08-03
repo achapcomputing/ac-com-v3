@@ -1,6 +1,6 @@
 ---
 title: Software Engineering Intern at Cisco
-period: May 2021 - Current
+period: May 2021 - July 2022
 experience_type: professional
 experience_skills: backend
 order: 1
