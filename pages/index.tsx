@@ -64,7 +64,7 @@ export async function getStaticProps() {
     return {
       slug,
       frontmatter,
-      content,
+      content
     };
   });
 
@@ -72,7 +72,7 @@ export async function getStaticProps() {
     props: {
       projects: projects.sort((a, b) => {
         return a.frontmatter.order - b.frontmatter.order; // sort by lowest rank shows up first
-      }),
-    },
+      })
+    }
   };
 }
